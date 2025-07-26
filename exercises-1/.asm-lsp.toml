@@ -1,0 +1,16 @@
+[default_config]
+version = "0.10.0"
+assembler = "ca65"
+instruction_set = "6502"
+
+[default_config.opts]
+compiler = "dasm"
+compile_flags_txt = []
+diagnostics = false
+default_diagnostics = false
+
+[[project]]
+path = ""
+version = "0.10.0"
+assembler = "ca65"
+instruction_set = "6502"
