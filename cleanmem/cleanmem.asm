@@ -15,8 +15,15 @@ Start:            ; Alias to $F000 address
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   lda #0          ; A = 0
   ldx #$FF        ; X = #$FF
-
+  sta $FF
 MemLoop:
-  sta $0,X        ; Store the value of A inside memory address $0 + X
   dex             ; X--
+  sta $0,X        ; Store the value of A inside memory address $0 + X
   bne MemLoop     ; if X != 0
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Fill the ROM size to exactly 4KB
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  org $FFFC        
+  .word Start     ; Reset vector at $FFFC (where the program starts)
+  .word Start     ; Interupt vector at $FFFE (unused in the VCS)
